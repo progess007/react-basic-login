@@ -1,101 +1,213 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './index.css';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Button, Container, Row, Col, Navbar, Nav, Image } from 'react-bootstrap';
+import Creater from './pages/creater';
+import MenuJapan from './pages/menujapan';
+import MenuOne from './pages/menuone';
+import MenuTwo from './pages/menutwo';
+import MenuThree from './pages/menuthree';
 
-const products = [
-  {id: 0, name: "เสื้อยืด",price: 300, image: "tshirt.jpg"},
-  {id: 1, name: "หมสก",price: 500, image: "hat.jpg"},
-  {id: 2, name: "กางเกง",price: 600, image: "shorts.jpg"}
+const menu = [
+  {id: 0, 
+   name: "ข้าวหมูทอดทงคัตสึ",
+   description: "xxx", 
+   image: "https://www.w3schools.com/css/paris.jpg"
+  },
+  {id: 1, 
+   name: "ราเมนหมูชาบู",
+   description: "xxx",
+   image: "https://www.w3schools.com/css/paris.jpg"
+  },
+  {id: 2,
+   name: "ซูชิหน้าปลาแซวม่อน",
+   description: "xxx",
+   image: "https://www.w3schools.com/css/paris.jpg"
+  }
 ]
 
-function Product(props) {
+function List(props) {
   return (
     <>
-      <div>
+      <div className='mt-5'>        
         <img 
           src={props.image}
-          className="img-fluid"
-          alt={props.name} 
+          className="image__round"
+          alt={props.name}
         />
       </div>
-      <div>{props.name}</div>
-      <div>{props.price} บาท</div>
+      <div className='h3 mt-2'>{props.name}</div>
+      <div className='h5'>{props.description}</div>
     </>
   );
 }
 
-function App() {
-
-  const [totalItems, setTotalItems] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
-
+function MyLink(props) {
   return (
-    <Container className="p-3 my-3">
-      <Row className='border'>
-        <Col className='text-center'>
-          <Product 
-            name={products[0].name}
-            price={products[0].price}
-            image={products[0].image}
-          />
-          <Button style={{margin: "5px 0px"}} 
-            onClick={()=> {
-              setTotalItems(totalItems+1)
-              setTotalPrice(totalPrice+products[0].price)
-            }}>เพิ่มลงตะกร้า</Button>
-        </Col>
-        <Col className='text-center'>
-          <Product 
-            name={products[1].name}
-            price={products[1].price}
-            image={products[1].image}
-          />
-          <Button style={{margin: "5px 0px"}}
-            onClick={()=>{
-              setTotalItems(totalItems+1)
-              setTotalPrice(totalPrice+products[1].price)
-            }}
-          >เพิ่มลงตะกร้า</Button>
-        </Col>
-        <Col className='text-center'>
-          <Product 
-            name={products[2].name}
-            price={products[2].price}
-            image={products[2].image}
-          />
-          <Button style={{margin: "5px 0px"}}
-            onClick={()=>{
-              setTotalItems(totalItems+1)
-              setTotalPrice(totalPrice+products[2].price)
-            }}
-          >เพิ่มลงตะกร้า</Button>
-        </Col>
-      </Row>
-      <Row className='border mt-3'>
+    
+    <NavLink
+      className="text-change px-2"
+      to={props.path}
+      style={({ isActive }) => {
+        return {
+          textDecoration: isActive ? "none" : "underline"
+        }
+      }}
+    >
+      {props.linkName}
+    </NavLink>
+  )
+}
+
+function MyLinkMenu(props) {
+  return (
+    <NavLink
+      className="btn btn-secondary my-3"
+      to={props.path}
+    >
+      {props.linkName}
+    </NavLink>
+  )
+}
+
+function MyLinkFooter(props) {
+  return(
+    <NavLink
+      className="text-noline px-2"
+      to={props.path}
+      style={({ isActive }) => {
+        return {
+          textDecoration: isActive ? "none" : "underline"
+        }
+      }}
+    >
+      {props.linkName}
+    </NavLink>
+  )
+}
+
+export function Menu() {
+  return <>
+    <Navbar bg="warning">
+        
+        <Navbar.Brand href="#home" className='ms-4'>
+          <img
+            alt="Sushi Image"
+            src="https://www.w3schools.com/css/paris.jpg" //ใส่ path รูป
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />{' '}
+        </Navbar.Brand>
+        <Nav className="me-auto">
+          <MyLink path="/" linkName="หน้าแรก"/>
+          <MyLink path="/menulist" linkName="เมนูอาหารญี่ปุ่น"/>
+          <MyLink path="/creater" linkName="ผู้จัดทำ"/>
+        </Nav>
+      
+    </Navbar>
+  </> 
+}
+
+function FoodList() {
+  return (
+    <>
+      <Row>
         <Col className="text-center p-4">
-          <h3 className=''>จำนวนสินค้าในตะกร้า {totalItems} ชิ้น</h3>
-          <h3>ราคาสินค้าในตะกร้าทั้งหมด {totalPrice} บาท</h3>
+          <h3 className='text--line'>วิธีทำอาหารญี่ปุ่นยอดฮิต</h3>
         </Col>
       </Row>
-    </Container>
-  );
+      <Row>
+        
+        <Col className='text-center'>
+          <List 
+            name={menu[0].name}
+            description={menu[0].description}
+            image={menu[0].image}
+          />
+
+          <MyLinkMenu path="/menuone" linkName="ดูวิธีทำ &#62;&#62;" />
+        </Col>
+
+        <Col className='text-center'>
+          <List 
+            name={menu[1].name}
+            description={menu[1].description}
+            image={menu[1].image}
+          />
+
+          <MyLinkMenu path="/menutwo" linkName="ดูวิธีทำ &#62;&#62;" />
+        </Col>
+
+        <Col className='text-center'>
+          <List
+            name={menu[2].name}
+            description={menu[2].description}
+            image={menu[2].image}
+          />
+
+          <MyLinkMenu path="/menuthree" linkName="ดูวิธีทำ &#62;&#62;" />
+        </Col>
+
+      </Row>
+    </>
+  )
 }
 
-/*
+export function Footer() {
+  return <>
+    <footer class="footer mt-4">
+        <div>
+          <span>&copy; 2023 </span>
+          <MyLinkFooter path="/creater" linkName="ผู้จัดทำ - Parisa" />
+        </div>
+        <div>
+          <a className='text-noline' href="#">Back to top</a>
+        </div>
+    </footer>
+  </>
+}
+
+
+// export function Menu() {
+//   return (
+//     <nav className='bg-secondary p-2 my-3 text-center'>
+//       <MyLink path="/" linkName="home"/>
+//       <MyLink path="/menulist" linkName="menulist" />
+//       <MyLink path="/contract" linkName="creater" />
+//     </nav>
+//   )
+// }
+
+function Index() {
+  return (
+    <>
+      <Menu />
+        <Container className='p-3 my-3'>
+          <FoodList />
+        </Container>
+      <Footer />
+    </>
+  )
+}
+
 function App() {
   return (
-    <Container className='p-3 my-3' style={{ backgroundColor: 'violet'}}>
-      <h1>Hello World</h1>
-      <Button style={{margin: "0px 3px"}}>Click Me</Button>
-      <Button variant="success" style={{marginLeft: "10px"}}>Click Me</Button>
-      <Button variant="danger" style={{marginLeft: "10px"}}>Click Me</Button>
-      <img src="pexels-andy-vu-3244513r.jpg" className='img-fluid mt-5' alt="View" />
-    </Container>
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path='/' element={<Index />} />
+          <Route path='/menulist' element={<MenuJapan />}></Route>
+          <Route path='/creater' element={<Creater />} />
+          <Route path='/menuone' element={<MenuOne />} />
+          <Route path='/menutwo' element={<MenuTwo />} />
+          <Route path='/menuthree' element={<MenuThree />} />
+        </Routes>
+    </BrowserRouter>
   );
 }
-*/
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

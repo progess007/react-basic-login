@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "menuName": "Menu One",
+    "menuPrice": 1000
+  },
+  {
+    "id": 2,
+    "menuName": "Menu Two",
+    "menuPrice": 2000
+  },
+  {
+    "id": 3,
+    "menuName": "Menu Three",
+    "menuPrice": 3000
+
+  }
+]

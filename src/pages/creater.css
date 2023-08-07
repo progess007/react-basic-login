@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@300&family=Sarabun&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.avatar {
+  width: 100%;
+  display: block;
+}
+
+.data {
+  padding: 32px;
+  padding-top: 24px;
+}
+
+h1 {
+  font-family: "Prompt", sans-serif;
+  margin-bottom: 12px;
+  line-height: 20px;
+}
+p {
+  font-family: "Prompt", sans-serif;
+  margin-bottom: 6px;
+  line-height: 15px;
+}
+
+body {
+  font-family: "Thonburi", "Sarabun", sans-serif;
+}
+
+.card {
+  width: 450px;
+  margin: 40px;
+  border: 4px solid #222;
+  color: #222;
+}
+
+.card::after {
+  content: "";
+  display: block;
+}
+
+.skill-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.skill {
+  padding: 2px 12px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
